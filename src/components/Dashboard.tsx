@@ -8,6 +8,7 @@ import { TransactionModal } from '@/components/TransactionModal';
 import { StatsCards } from '@/components/StatsCards';
 import { FinancialCalendar } from '@/components/FinancialCalendar';
 import { RecentTransactions } from '@/components/RecentTransactions';
+import { ExpensesPieChart } from '@/components/ExpensesPieChart';
 
 export const Dashboard: React.FC = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -73,6 +74,15 @@ export const Dashboard: React.FC = () => {
             <RecentTransactions />
           </motion.div>
         </div>
+
+        {/* Gráfico de gastos por categoria */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+        >
+          <ExpensesPieChart />
+        </motion.div>
 
         {/* Seção de investimentos (placeholder) */}
         <motion.div

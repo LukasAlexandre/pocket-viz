@@ -60,6 +60,13 @@ All colors MUST be HSL.
     --shadow-card: 0 4px 20px hsl(210 15% 15% / 0.08);
     --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
     
+    /* Chart colors */
+    --chart-1: 142 76% 36%;
+    --chart-2: 346 87% 43%;
+    --chart-3: 262 83% 58%;
+    --chart-4: 31 81% 56%;
+    --chart-5: 197 37% 24%;
+    
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -131,6 +138,13 @@ All colors MUST be HSL.
     --shadow-elegant: 0 8px 32px hsl(0 0% 0% / 0.3);
     --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.2);
     --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    
+    /* Chart colors - dark mode */
+    --chart-1: 142 69% 58%;
+    --chart-2: 346 77% 49%;
+    --chart-3: 262 83% 58%;
+    --chart-4: 31 81% 56%;
+    --chart-5: 197 37% 24%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
