@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TransactionProvider } from "@/contexts/TransactionContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Contas from "./pages/Contas";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/contas" element={<Contas />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   X, 
   Home, 
@@ -33,12 +34,16 @@ const bottomItems = [
 ];
 
 export const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, onAddTransaction }) => {
-  const handleItemClick = (action?: string) => {
+  const navigate = useNavigate();
+
+  function handleItemClick(action?: string, label?: string) {
     if (action === 'add-transaction') {
       onAddTransaction();
+    } else if (label === 'Contas') {
+      navigate('/contas');
     }
     onClose();
-  };
+  }
 
   return (
     <AnimatePresence>
@@ -83,7 +88,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, onAddTransa
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => handleItemClick(item.action)}
+                    onClick={() => handleItemClick(item.action, item.label)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all hover:bg-accent ${
                       item.active ? 'bg-primary/10 text-primary border border-primary/20' : ''
                     }`}
