@@ -9,6 +9,7 @@ import { StatsCards } from '@/components/StatsCards';
 import { FinancialCalendar } from '@/components/FinancialCalendar';
 import { RecentTransactions } from '@/components/RecentTransactions';
 import { ExpensesPieChart } from '@/components/ExpensesPieChart';
+import SyncButton from '@/components/SyncButton';
 
 export const Dashboard: React.FC = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -19,12 +20,17 @@ export const Dashboard: React.FC = () => {
     setIsSideMenuOpen(false);
   };
 
+  // Depois que sincronizar, recarrega os dados da tela.
+  const handleSynced = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header onMenuClick={() => setIsSideMenuOpen(true)} />
-      
+
       <main className="container mx-auto px-4 py-6 space-y-8">
-        {/* Título e ação rápida */}
+        {/* Título e ações rápidas */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,22 +38,23 @@ export const Dashboard: React.FC = () => {
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
         >
           <div>
-            <h1 className="text-2xl font-bold text-foreground">
-              Dashboard Financeiro
-            </h1>
-            <p className="text-muted-foreground mt-1">
-              Acompanhe seus gastos e entradas
-            </p>
+            <h1 className="text-2xl font-bold text-foreground">Dashboard Financeiro</h1>
+            <p className="text-muted-foreground mt-1">Acompanhe seus gastos e entradas</p>
           </div>
-          
-          <Button
-            onClick={openTransactionModal}
-            className="bg-gradient-primary hover:opacity-90 shadow-glow transition-all duration-300"
-            size="lg"
-          >
-            <Plus className="h-5 w-5 mr-2" />
-            Nova Transação
-          </Button>
+
+          <div className="flex items-center gap-2">
+            {/* NOVO: botão de sincronizar */}
+            <SyncButton onDone={handleSynced} />
+
+            <Button
+              onClick={openTransactionModal}
+              className="bg-gradient-primary hover:opacity-90 shadow-glow transition-all duration-300"
+              size="lg"
+            >
+              <Plus className="h-5 w-5 mr-2" />
+              Nova Transação
+            </Button>
+          </div>
         </motion.div>
 
         {/* Cards de estatísticas */}
@@ -115,3 +122,6 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
+
+// também exporta como default para evitar conflito com o roteador
+export default Dashboard;

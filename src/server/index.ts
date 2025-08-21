@@ -1,38 +1,29 @@
-console.log("=== INÍCIO DO INDEX.TS ATUAL ===");
-
+// src/server/index.ts
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import openFinanceRouter from "./openfinance.js";
-
+import openFinanceRouter from "./routes/openfinance.js";
 
 const app = express();
-const PORT = process.env.PORT || 3333;
 
+// Libera o frontend local
+const FRONT_ORIGINS = (process.env.FRONT_ORIGINS || "http://localhost:8080")
+  .split(",")
+  .map(s => s.trim());
 
-app.use(cors());
+app.use(cors({ origin: FRONT_ORIGINS, credentials: true }));
 app.use(express.json());
 
-// Rotas Open Finance
+// Sanity
+app.get("/api/ping", (_req, res) => res.json({ pong: true }));
+
+// Suas rotas de Open Finance
 app.use("/api/openfinance", openFinanceRouter);
-console.log('OpenFinance router attached');
 
-// Rota de debug direta
-app.get("/api/debug", (_req, res) => {
-  res.json({ ok: true, msg: "rota debug ativa" });
-});
+// 404 padrão
+app.use((_req, res) => res.status(404).json({ error: "Rota não encontrada (debug)" }));
 
-app.get("/api/ping", (_req, res) => res.send("pong"));
-
-// Middleware 404 customizado para debug (sempre por último)
-app.use((req, res) => {
-  console.log("404 handler: URL não encontrada:", req.originalUrl);
-  res.status(404).json({ error: "Rota não encontrada (debug)" });
-});
-
-app.get("/api/teste-direto", (_req, res) => {
-  res.json({ ok: true });
-});
+const PORT = Number(process.env.PORT || 3333);
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`API rodando em http://localhost:${PORT}`);
 });
